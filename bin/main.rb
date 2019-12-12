@@ -77,6 +77,34 @@ class Board
       puts "#{@@board[1]}"
       puts "#{@@board[2]}"
     end
+
+    def wincondition
+      if @@board[0][0] == @@board[0][1] && @@board[0][0] == @@board[0][2] && @@board[0][1] == @@board[0][2]
+        return true
+      end
+      if @@board[1][0] == @@board[1][1] && @@board[1][0] == @@board[1][2] && @@board[1][1] == @@board[1][2]
+        return true
+      end
+      if @@board[2][0] == @@board[2][1] && @@board[2][0] == @@board[2][2] && @@board[2][1] == @@board[2][2]
+        return true
+      end
+      if @@board[0][0] == @@board[1][0] && @@board[0][0] == @@board[2][0] && @@board[1][0] == @@board[2][0]
+        return true
+      end
+      if @@board[0][1] == @@board[1][1] && @@board[0][1] == @@board[2][1] && @@board[1][1] == @@board[2][1]
+        return true
+      end
+      if @@board[0][2] == @@board[1][2] && @@board[0][2] == @@board[2][2] && @@board[1][2] == @@board[2][2]
+        return true
+      end
+      if @@board[0][0] == @@board[1][1] && @@board[0][0] == @@board[2][2] && @@board[1][1] == @@board[2][2]
+        return true
+      end
+      if @@board[0][2] == @@board[1][1] && @@board[0][2] == @@board[2][0] && @@board[1][1] == @@board[2][0]
+        return true
+      end
+      false
+    end
 end
 
 
@@ -113,6 +141,11 @@ while game_on
   puts "#{player.get_name} turn , choose a cell[1-9]:"
   gameBoard.move(gets.chomp, player)
   gameBoard.print_board
+  if gameBoard.wincondition == true
+     game_on = false
+   else
+     puts "keep playing ..."
+   end
 
   if i >= 9 #winner pattern match
     game_on = false
