@@ -6,7 +6,7 @@ def findSecondChar(val)
     else
         return "X"
     end
-end 
+end
 
 puts "Welcome from the world Tic Tac Toe"
 puts "Enter your first player name?"
@@ -19,5 +19,8 @@ puts "Enter your second player name?"
 secondPlayer = gets.chomp
 secondChar = findSecondChar(firstChar)
 puts "#{secondPlayer} is auto choosing #{secondChar}"
-
-
+puts "#{firstPlayer} turn"
+puts "#{['1', '2', '3']}"
+puts "#{['4', '5', '6']}"
+puts "#{['7', '8', '9']}"
+puts "Winner: #{secondPlayer}"
