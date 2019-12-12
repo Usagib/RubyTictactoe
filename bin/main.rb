@@ -34,11 +34,48 @@ end
 
 class Board
     def initialize
-        @board = [
+        @@board = [
                   ["1", "2", "3"],
                   ["4", "5", "6"],
                   ["7", "8", "9"]
                 ]
+    end
+
+    def move(cell, player)
+      num = cell.to_i
+      if num == 1
+        @@board[0][0] != "1" ? false : @@board[0][0] = player.get_symbol
+      end
+      if num == 2
+        @@board[0][1] != "2" ? false : @@board[0][1] = player.get_symbol
+      end
+      if num == 3
+        @@board[0][2] != "3" ? false : @@board[0][2] = player.get_symbol
+      end
+      if num == 4
+        @@board[1][0] != "4" ? false : @@board[1][0] = player.get_symbol
+      end
+      if num == 5
+        @@board[1][1] != "5" ? false : @@board[1][1] = player.get_symbol
+      end
+      if num == 6
+        @@board[1][2] != "6" ? false : @@board[1][2] = player.get_symbol
+      end
+      if num == 7
+        @@board[2][0] != "7" ? false : @@board[2][0] = player.get_symbol
+      end
+      if num == 8
+        @@board[2][1] != "8" ? false : @@board[2][1] = player.get_symbol
+      end
+      if num == 9
+        @@board[2][2] != "9" ? false : @@board[2][2] = player.get_symbol
+      end
+    end
+
+    def print_board
+      puts "#{@@board[0]}"
+      puts "#{@@board[1]}"
+      puts "#{@@board[2]}"
     end
 end
 
@@ -50,7 +87,6 @@ def findSecondChar(val)
         return "X"
     end
 end
-
 puts "Welcome from the world Tic Tac Toe"
 puts "Enter your first player name?"
 firstPlayer = Player.new
@@ -66,10 +102,8 @@ secondPlayer.set_symbol(findSecondChar(firstPlayer.get_symbol))
 puts "#{secondPlayer.get_name} is auto choosing #{secondPlayer.get_symbol}"
 print "###\n ###\n ###\n"
 puts "Game is starting ....."
-puts "#{['1', '2', '3']}"
-puts "#{['4', '5', '6']}"
-puts "#{['7', '8', '9']}"
-
+gameBoard = Board.new
+gameBoard.print_board
 game_on = true
 i = 0
 winner = true
@@ -77,11 +111,12 @@ while game_on
   i = i + 1
   player = i % 2  == 0 ? firstPlayer : secondPlayer;
   puts "#{player.get_name} turn , choose a cell[1-9]:"
-  input = gets.chomp
+  gameBoard.move(gets.chomp, player)
+  gameBoard.print_board
 
-  if winner #winner pattern match
+  if i >= 9 #winner pattern match
     game_on = false
   end
 end
 
-puts "Winner: #{secondPlayer.get_name}"
+puts "Winner: #{player.get_name}"
