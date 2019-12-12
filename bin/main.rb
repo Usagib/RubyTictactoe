@@ -25,12 +25,18 @@ puts "#{['1', '2', '3']}"
 puts "#{['4', '5', '6']}"
 puts "#{['7', '8', '9']}"
 
-#while 1..9 time looping ....
-puts "#{firstPlayer} turn , choose a cell[1-9]:"
-# get input from firstPlayer
-# show the pattern 
-# compare the winning pattern
-# update 
-#loop end here
+game_on = true
+i = 0 
+winner = true
+while game_on
+  i = i + 1
+  player = i % 2  == 0 ? firstPlayer : secondPlayer; 
+  puts "#{player} turn , choose a cell[1-9]:"
+  input = gets.chomp
+  
+  if winner #winner pattern match 
+    game_on = false
+  end 
+end 
 
 puts "Winner: #{secondPlayer}"
