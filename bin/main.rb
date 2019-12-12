@@ -1,2 +1,3 @@
 #!/usr/bin/env ruby
-puts "Hello world!"
+
+puts "Welcome from the world Tic Tac Toe"
