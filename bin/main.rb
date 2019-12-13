@@ -20,6 +20,10 @@ class Player
 
   def set_symbol(symbol)
     @symbol = symbol
+    while @symbol != 'X' && @symbol != 'O'
+      puts "Try again with X (uppercase x) or O (uppercase o)"
+      @symbol = gets.chomp
+    end
   end
 
   def get_name
@@ -44,38 +48,95 @@ class Board
     def move(cell, player)
       num = cell.to_i
       if num == 1
-        @@board[0][0] != "1" ? false : @@board[0][0] = player.get_symbol
+        if @@board[0][0] != "1"
+          puts "Cell taken! Turn lost :("
+        else
+          @@board[0][0] = player.get_symbol
+        end
+        return true
       end
       if num == 2
-        @@board[0][1] != "2" ? false : @@board[0][1] = player.get_symbol
+        if @@board[0][1] != "2"
+          puts "Cell taken! Turn lost :("
+        else
+          @@board[0][1] = player.get_symbol
+        end
+        return true
       end
       if num == 3
-        @@board[0][2] != "3" ? false : @@board[0][2] = player.get_symbol
+        if @@board[0][2] != "3"
+          puts "Cell taken! Turn lost :("
+        else
+          @@board[0][2] = player.get_symbol
+        end
+        return true
       end
       if num == 4
-        @@board[1][0] != "4" ? false : @@board[1][0] = player.get_symbol
+        if @@board[1][0] != "4"
+          puts "Cell taken! Turn lost :("
+        else
+          @@board[1][0] = player.get_symbol
+        end
+        return true
       end
       if num == 5
-        @@board[1][1] != "5" ? false : @@board[1][1] = player.get_symbol
+        if @@board[1][1] != "5"
+          puts "Cell taken! Turn lost :("
+        else
+          @@board[1][1] = player.get_symbol
+        end
+        return true
       end
       if num == 6
-        @@board[1][2] != "6" ? false : @@board[1][2] = player.get_symbol
+        if @@board[1][2] != "6"
+          puts "Cell taken! Turn lost :("
+        else
+          @@board[1][2] = player.get_symbol
+        end
+        return true
       end
       if num == 7
-        @@board[2][0] != "7" ? false : @@board[2][0] = player.get_symbol
+        if @@board[2][0] != "7"
+          puts "Cell taken! Turn lost :("
+        else
+          @@board[2][0] = player.get_symbol
+        end
+        return true
       end
       if num == 8
-        @@board[2][1] != "8" ? false : @@board[2][1] = player.get_symbol
+        if @@board[2][1] != "8"
+          puts "Cell taken! Turn lost :("
+        else
+          @@board[2][1] = player.get_symbol
+        end
+        return true
       end
       if num == 9
-        @@board[2][2] != "9" ? false : @@board[2][2] = player.get_symbol
+        if @@board[2][2] != "9"
+          puts "Cell taken! Turn lost :("
+        else
+          @@board[2][2] = player.get_symbol
+        end
+        return true
       end
+      puts "not a valid cell! turn lost!"
     end
 
     def print_board
       puts "#{@@board[0]}"
       puts "#{@@board[1]}"
       puts "#{@@board[2]}"
+    end
+
+    def tiecondition #not working
+      arr = @@board
+      puts arr.to_a
+      print arr.to_a.all?
+      if arr.to_a.all?{|x| x == "X" || x == "O"}
+        puts "Nothing else to do! Tied Game!"
+        return true
+      end
+      return false
     end
 
     def wincondition
@@ -140,16 +201,13 @@ while game_on
   player = i % 2  == 0 ? firstPlayer : secondPlayer;
   puts "#{player.get_name} turn , choose a cell[1-9]:"
   gameBoard.move(gets.chomp, player)
+  puts "\n"
   gameBoard.print_board
   if gameBoard.wincondition == true
      game_on = false
-   else
-     puts "keep playing ..."
-   end
-
-  if i >= 9 #winner pattern match
+     puts "Winner: #{player.get_name}"
+  end
+  if gameBoard.tiecondition
     game_on = false
   end
 end
-
-puts "Winner: #{player.get_name}"
