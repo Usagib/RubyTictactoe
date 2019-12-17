@@ -1,10 +1,14 @@
+# frozen_string_literal: true
 
+# board Class
 class Board
   attr_accessor :board_cells, :winning_combinations
 
   def initialize
     @board_cells = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    @winning_combinations = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
+    @winning_combinations = [[1, 2, 3], [4, 5, 6], [7, 8, 9],
+                             [1, 4, 7], [2, 5, 8], [3, 6, 9],
+                             [1, 5, 9], [3, 5, 7]]
   end
 
   def print_board

@@ -1,4 +1,6 @@
+# frozen_string_literal: true
 
+# Player class
 class Player
   attr_accessor :moves, :winner
   attr_reader :name, :sign
