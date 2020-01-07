@@ -1,50 +1,32 @@
 #!/usr/bin/env ruby
-class Tictactoe
-  def initialize()
-    @player1 = Player.new(1, 'X')
-    @player2 = Player.new(2, 'O')
-    @board = Board.new
-    start()
-  end
-end
 
-class Player
-  def initialize(name = nil, symbol = nil)
-      @name = name
-      @symbol = symbol
-  end
+require_relative "../lib/board.rb"
+require_relative "../lib/player.rb"
 
-  def set_name(name)
-    @name = name
-  end
+puts "Welcome from the world Tic Tac Toe"
+puts "Enter your first player name?"
+first_player_name = gets.chomp
+first_player = first_player_name.empty? ? Player.new("firstPlayer", "X") :
+  Player.new(first_player_name, "X")
+puts "Welcome #{first_player.name}, Your Radomly choose #{first_player.sign}"
+puts "#################################"
 
-  def set_symbol(symbol)
-    @symbol = symbol
-    while @symbol != 'X' && @symbol != 'O'
-      puts "Try again with X (uppercase x) or O (uppercase o)"
-      @symbol = gets.chomp
-    end
-  end
+puts "Enter your second player name?"
+second_player_name = gets.chomp
+second_player = second_player_name.empty? ? Player.new("second_player", "O") :
+  Player.new(second_player_name, "O")
 
-  def get_name
-    @name
-  end
+puts "Welcome #{second_player.name}, Your choose is #{second_player.sign}"
 
-  def get_symbol
-    @symbol
-  end
+puts "\t### \t### \t### \n\t### \t### \t### \n\t### \t### \t###"
+puts "###################################"
+puts "###################################"
+puts "\t### \t### \t### \n\t### \t### \t### \n\t### \t### \t###"
+puts "###################################"
+puts "###################################"
+puts "\t### \t### \t### \n\t### \t### \t### \n\t### \t### \t###"
 
-end
-
-class Board
-    def initialize
-        @@board = [
-                  ["1", "2", "3"],
-                  ["4", "5", "6"],
-                  ["7", "8", "9"]
-                ]
-    end
-
+<<<<<<< HEAD
     def move(cell, player)
       num = cell.to_i
       if num == 1
@@ -121,13 +103,22 @@ class Board
       end
       puts "not a valid cell! turn lost!"
     end
+=======
+puts "Game is starting ....."
+game_board = Board.new
+puts game_board.print_board
+game_on = true
+i = 0
+while game_on && i < 10
+  i += 1
+  player = (i % 2).zero? ? first_player : second_player
+  puts "#{player.name} turn , choose a cell[1-9]:"
+>>>>>>> development
 
-    def print_board
-      puts "#{@@board[0]}"
-      puts "#{@@board[1]}"
-      puts "#{@@board[2]}"
-    end
+  move = gets.chomp.to_i
+  puts "#{player.name},you choose #{move} :"
 
+<<<<<<< HEAD
     def tiecondition #not working
       arr = @@board
       puts arr.to_a
@@ -167,8 +158,18 @@ class Board
       false
     end
 end
+=======
+  until game_board.board_cells.include?(move)
+    puts "Your move is duplicated, Please input a number between 1-9 in the available moves on the board"
+    move = gets.chomp.to_i
+  end
+>>>>>>> development
 
+  player.add_moves(move)
+  game_board.board_cells[move - 1] = player.sign
+  game_board.check_winning_move(player)
 
+<<<<<<< HEAD
 def findSecondChar(val)
     if val == "X"
         return "O"
@@ -208,6 +209,17 @@ while game_on
      puts "Winner: #{player.get_name}"
   end
   if gameBoard.tiecondition
+=======
+  puts game_board.print_board
+
+  if player.winner
+    puts "The winner is: #{player.name}!"
+>>>>>>> development
     game_on = false
+    break
+  end
+  if i == 9
+    puts "The game is tie."
+    break
   end
 end
