@@ -1,7 +1,9 @@
 require "board"
+require "player"
 
 RSpec.describe Board do
   let(:board) { Board.new }
+  let(:player) { Player.new("Nyan", "X") }
   it "has a layout and that have board cells" do
     expect(board.board_cells).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
   end
@@ -46,5 +48,13 @@ RSpec.describe Board do
     \t \t --+---+---
     \t \t #{board.board_cells[6]} | #{board.board_cells[7]} | #{board.board_cells[8]}
     ")
+  end
+
+  it "can check winning player by his moves" do
+    player.add_moves(1)
+    player.add_moves(2)
+    player.add_moves(3)
+    board.check_winning_move(player)
+    expect(player.winner).to be true
   end
 end
