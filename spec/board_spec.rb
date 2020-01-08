@@ -6,6 +6,8 @@ require "player"
 RSpec.describe Board do
   let(:board) { Board.new }
   let(:player) { Player.new("Nyan", "X") }
+  let(:player2) { Player.new("Ko", "O") }
+
   it "has a layout and that have board cells" do
     expect(board.board_cells).to eq([1, 2, 3, 4, 5, 6, 7, 8, 9])
   end
@@ -63,4 +65,20 @@ RSpec.describe Board do
   it "check duplicate move from player" do
     expect(board.board_cells).to include(1)
   end
+
+  it "checking for tie game" do
+    player.add_moves(1)
+    player2.add_moves(5) 
+    player.add_moves(3) 
+    player2.add_moves(2)
+    player.add_moves(8)
+    player2.add_moves(9)
+    player.add_moves(7)
+    player2.add_moves(4)
+    player.add_moves(6)
+    board.check_winning_move(player)
+    board.check_winning_move(player2)
+    expect(player.winner).to be false
+    expect(player.winner).to be false
+  end 
 end
