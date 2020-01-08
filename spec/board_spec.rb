@@ -59,4 +59,8 @@ RSpec.describe Board do
     board.check_winning_move(player)
     expect(player.winner).to be true
   end
+
+  it "check duplicate move from player" do
+    expect(board.board_cells).to include(1)
+  end
 end
